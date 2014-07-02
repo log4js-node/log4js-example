@@ -7,7 +7,7 @@
           "type": "dateFile",
           "filename": "log/access.log",
           "pattern": "-yyyy-MM-dd",
-          "categories": "http"
+          "category": "http"
         },
         {
           "type": "file",
