@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+var debug = require('debug')('log4js-example');
+var cluster = require('express-cluster');
+/**
+ * Initialise log4js first, so we don't miss any log messages
+ */
+var log4js = require('log4js');
+log4js.configure('./config/log4js.json');
+
+var log = log4js.getLogger("startup");
+
+//let's start up a cluster
+cluster(function() {
+  var app = require('../app');
+
+  app.set('port', process.env.PORT || 3000);
+
+  var server = app.listen(app.get('port'), function() {
+    log.info('Express server listening on port ', server.address().port, " with pid ", process.pid );
+  });
+});
