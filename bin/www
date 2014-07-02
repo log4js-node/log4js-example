@@ -1,6 +1,19 @@
 #!/usr/bin/env node
 var debug = require('debug')('log4js-example');
 var cluster = require('express-cluster');
+
+/**
+ * make a log directory, just in case it isn't there.
+ */
+try {
+  require('fs').mkdirSync('./log');
+} catch (e) {
+  if (e.code != 'EEXIST') {
+    console.error("Could not set up log directory, error was: ", e);
+    process.exit(1);
+  }
+}
+
 /**
  * Initialise log4js first, so we don't miss any log messages
  */
