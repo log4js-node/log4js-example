@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 //We won't need this.
 //var logger = require('morgan');
-var log = log4js.getLogger("app");
+var log = require('./util/logger').getLogger('app');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -22,7 +22,8 @@ app.use(favicon());
 
 // replace this with the log4js connect-logger
 // app.use(logger('dev'));
-app.use(log4js.connectLogger(log4js.getLogger("http"), { level: 'auto' }));
+var expressLog = require('./util/logger').getLogger('http');
+app.use(log4js.connectLogger(expressLog, { level: 'auto' }));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
