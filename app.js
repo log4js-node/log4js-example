@@ -5,6 +5,9 @@ var favicon = require('static-favicon');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+// load config
+log4js.configure('./config/log4js.json');
+
 //We won't need this.
 //var logger = require('morgan');
 var log = log4js.getLogger("app");
